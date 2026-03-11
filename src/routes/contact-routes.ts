@@ -6,6 +6,9 @@ const contactRoutes = Router();
 
 const contactController = new ContactController();
 
-contactRoutes.post("/", contactController.create);
+contactRoutes.post("/create", contactController.create);
+contactRoutes.get("/findAll", contactController.list);
+contactRoutes.patch("/:id", contactController.update);
+contactRoutes.delete("/:id", contactController.delete);
 
 export { contactRoutes };
