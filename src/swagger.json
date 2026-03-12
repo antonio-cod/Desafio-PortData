@@ -1,0 +1,50 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PortData Documentation",
+    "description": "This is an API - PortData",
+    "version": "1.0.0",
+    "contact": {
+      "email": "antonio_carlostads@hotmail.com"
+    }
+  },
+  "paths": {
+    "/contacts/create": {
+      "post": {
+        "tags": ["Contact"],
+        "summary": "Create a contact",
+        "description": "Create a new contact",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "nome contato",
+                  "phone": "65999999999"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "name": "Created"
+          },
+          "400": {
+            "name": "Já existe um contato com esse nome cadastrado!",
+            "phone": "Já existe um contato com esse telefone cadastrado!"
+          }
+        }
+      }
+    }
+  }
+}
