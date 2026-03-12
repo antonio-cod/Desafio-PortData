@@ -3,5 +3,5 @@ import { contactRoutes } from "./contact-routes";
 
 const routes = Router();
 
-routes.use("/contact", contactRoutes);
+routes.use("/contacts", contactRoutes);
 export { routes };

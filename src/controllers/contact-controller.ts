@@ -9,7 +9,11 @@ class ContactController {
       name: z
         .string()
         .trim()
-        .min(3, { message: "O nome precisa ter pelo menos 3 caracteres" }),
+        // .min(6, { message: "O nome deve ter pelo menos 6 caracteres" })
+        .max(100, { message: "O nome pode ter no máximo 100 caracteres" })
+        .regex(/^[A-Za-zÀ-ÿ]{3,}\s[A-Za-zÀ-ÿ]{3,}.*$/, {
+          message: "O nome deve ter pelo menos nome e sobrenome",
+        }),
 
       phone: z
         .string()
@@ -127,7 +131,7 @@ class ContactController {
 
     return response
       .status(200)
-      .json({ message: "Contato deletado com sucesso" });
+      .json({ message: "Contato deletado com sucesso!" });
   }
 }
 
