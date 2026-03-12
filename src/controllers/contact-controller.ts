@@ -68,15 +68,19 @@ class ContactController {
       name: z
         .string()
         .trim()
-        .min(3, { message: "O nome precisa ter pelo menos 3 caracteres" }),
+        .min(6, { message: "Informe nome e sobrenome mínimo 3 letras cada" })
+        .max(100, { message: "O nome pode ter no máximo 100 letras" })
+        .regex(/^[A-Za-zÀ-ÿ]{2,}(?:\s[A-Za-zÀ-ÿ]{2,})+$/, {
+          message: "Nome deve conter apenas letras",
+        }),
+
       phone: z
         .string()
-        .min(11, {
-          message:
-            "O telefone precisa ter no mínimo 11 caracteres exemplo: DDD + Numero",
+        .length(11, {
+          message: "O telefone deve ter 11 números",
         })
-        .max(11, {
-          message: "O telefone precisa ter 11 caracteres DDD + Numero",
+        .refine((value) => Number.isInteger(Number(value)), {
+          message: "O telefone deve conter apenas números",
         }),
     });
 
