@@ -1,5 +1,4 @@
 import { app } from "@/app";
-import { prisma } from "@/database/prisma";
 
 import request from "supertest";
 
@@ -7,7 +6,7 @@ describe("ContactController", () => {
   let contact_id: string;
 
   it("should create a new contact sucessfully", async () => {
-    const response = await request(app).post("/contacts/create").send({
+    const response = await request(app).post("/contacts").send({
       name: "Test contact",
       phone: "65996208093",
     });
@@ -20,7 +19,7 @@ describe("ContactController", () => {
   });
 
   it("should throw an error if contact with same name already exists", async () => {
-    const response = await request(app).post("/contacts/create").send({
+    const response = await request(app).post("/contacts").send({
       name: "Test contact",
       phone: "65996208092",
     });
@@ -32,7 +31,7 @@ describe("ContactController", () => {
   });
 
   it("should throw an error if contact with same phone already exists", async () => {
-    const response = await request(app).post("/contacts/create").send({
+    const response = await request(app).post("/contacts").send({
       name: "New test contact",
       phone: "65996208093",
     });
@@ -44,7 +43,7 @@ describe("ContactController", () => {
   });
 
   it("should list all contacts", async () => {
-    const response = await request(app).get("/contacts/findAll");
+    const response = await request(app).get("/contacts");
 
     expect(response.status).toBe(200);
     expect(Array.isArray(response.body)).toBe(true);
